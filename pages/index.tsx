@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext';
+import { api } from '../services/api';
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
     }
 
     signIn(data)
+
   }
 
   return (
