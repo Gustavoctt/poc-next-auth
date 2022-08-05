@@ -3,7 +3,7 @@ import { createContext } from "react";
 import Router, { useRouter } from "next/router";
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 
-import { api } from "../services/api";
+import { api } from "../services/apiClient";
 
 type UserProps = {
   email: string,
