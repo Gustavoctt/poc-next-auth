@@ -61,7 +61,6 @@ export function setupAPIClient(ctx = undefined){
             if(typeof window !== 'undefined'){
               signOut()
             }
-
           }).finally(() => {
             isRefreshing = false;
           })
@@ -70,18 +69,22 @@ export function setupAPIClient(ctx = undefined){
         return new Promise((resolve, reject) => {
           failedRequestsQueue.push({
             onSucess: (token: string) => {
+              // quando o processo de refresh estver finalizado
               originalConfig.headers['Authorization'] = `Bearer ${token}`
 
               resolve(api(originalConfig))
             },
             onFailure: (err: AxiosError) => {
+              // quando ocorrer algum erro
               reject(err)
             }
           })
         })
       } else {
+        // o erro pode não ser do tipo token expirado, portanto ele é deslogado
         if(typeof window !== 'undefined'){
           signOut()
+          // verifica se está no browser
         }else{
           return Promise.reject(new AuthTokenError())
         }
